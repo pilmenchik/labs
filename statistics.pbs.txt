@@ -1,0 +1,80 @@
+#!/bin/bash
+
+#PBS -l procs=1
+#PBS -l nodes=1
+#PBS -l walltime=0:02:00
+
+#PBS -o Sosnov.o.${PBS_JOBID}_statistics-lab2
+#PBS -e Sosnov.e.${PBS_JOBID}_statistics-lab2
+#PBS -N Sosnov_statistics-lab2
+
+cd $PBS_O_WORKDIR
+
+total_s1=0
+total_s2=0
+total_s3=0
+total_s4=0
+total_s5=0
+total_s6=0
+total_s7=0
+total_s8=0
+total_s9=0
+total_s10=0
+
+for i in {1..100}
+do
+    for k in {0..3}
+    do
+        s1=`cat ./result/results$i/out.1/nank.$k/stdout | grep s1.cluster | wc -l`
+        s2=`cat ./result/results$i/out.1/nank.$k/stdout | grep s2.cluster | wc -l`
+        s3=`cat ./result/results$i/out.1/nank.$k/stdout | grep s3.cluster | wc -l`
+        s4=`cat ./result/results$i/out.1/nank.$k/stdout | grep s4.cluster | wc -l`
+        s5=`cat ./result/results$i/out.1/nank.$k/stdout | grep s5.cluster | wc -l`
+        s6=`cat ./result/results$i/out.1/nank.$k/stdout | grep s6.cluster | wc -l`
+        s7=`cat ./result/results$i/out.1/nank.$k/stdout | grep s7.cluster | wc -l`
+        s8=`cat ./result/results$i/out.1/nank.$k/stdout | grep s8.cluster | wc -l`
+        s9=`cat ./result/results$i/out.1/nank.$k/stdout | grep s9.cluster | wc -l`
+        s10=`cat ./result/results$i/out.1/nank.$k/stdout | grep s10.cluster | wc -l`
+
+        let "total_s1 = $total_s1 + $s1"
+        let "total_s2 = $total_s2 + $s2"
+        let "total_s3 = $total_s3 + $s3"
+        let "total_s4 = $total_s4 + $s4"
+        let "total_s5 = $total_s5 + $s5"
+        let "total_s6 = $total_s6 + $s6"
+        let "total_s7 = $total_s7 + $s7"
+        let "total_s8 = $total_s8 + $s8"
+        let "total_s9 = $total_s9 + $s9"
+        let "total_s10 = $total_s10 + $s10"
+    done
+done
+
+echo "total_s1 $total_s1" >> statistics_file
+cat result_cache | grep -a s1 | head -n 4 >> statistics_file
+
+echo "total_s2 $total_s2" >> statistics_file
+cat result_cache | grep -a s2 | head -n 4 >> statistics_file
+
+echo "total_s3 $total_s3" >> statistics_file
+cat result_cache | grep -a s3 | head -n 4 >> statistics_file
+
+echo "total_s4 $total_s4" >> statistics_file
+cat result_cache | grep -a s4 | head -n 4 >> statistics_file
+
+echo "total_s5 $total_s5" >> statistics_file
+cat result_cache | grep -a s5 | head -n 4 >> statistics_file
+
+echo "total_s6 $total_s6" >> statistics_file
+cat result_cache | grep -a s6 | head -n 4 >> statistics_file
+
+echo "total_s7 $total_s7" >> statistics_file
+cat result_cache | grep -a s7 | head -n 4 >> statistics_file
+
+echo "total_s8 $total_s8" >> statistics_file
+cat result_cache | grep -a s8 | head -n 4 >> statistics_file
+
+echo "total_s9 $total_s9" >> statistics_file
+cat result_cache | grep -a s9 | head -n 4 >> statistics_file
+
+echo "total_s10 $total_s10" >> statistics_file
+cat result_cache | grep -a s10 | head -n 4 >> statistics_file
